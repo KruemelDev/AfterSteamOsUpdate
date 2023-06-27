@@ -29,6 +29,10 @@ installNetstat() {
 installRatbagd() {
     sudo pacman -S ratbagd
 }
+installPython() {
+    sudo pacman -S python
+    sudo pacman -S python-pip
+}
 
 # Install pacman packages
 installMorePackages() {
@@ -54,6 +58,14 @@ installMorePackages() {
         [yY] | "" ) installRatbagd;;
         [nN] ) echo "Ratbagd was not installed";;
         * ) echo "Invalid input. Ratbagd was not installed";;
+    esac
+
+    echo
+    read -p "Install python? Press Enter or type 'y' to proceed, or 'n' to skip: " install_python
+    case "$install_python" in
+        [yY] | "" ) installPython;;
+        [nN] ) echo "Python was not installed";;
+        * ) echo "Invalid input. Python was not installed";;
     esac
 }
 
