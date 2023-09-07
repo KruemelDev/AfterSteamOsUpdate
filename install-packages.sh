@@ -2,10 +2,15 @@
 
 # Update all packages
 sudo pacman -Syu
+sudo steamos-readyonly disable
 
 read -p "Do you want to install the base packages? Press Enter or type 'y' to proceed, or 'n' to skip: " base_packages
 if [[ -z "$base_packages" || "$base_packages" == "y" ]]
 then
+
+    # "remove" gnupg
+    sudo mv /etc/gnupg /etc/gnupg2
+
     # Init keyring
     sudo pacman-key --init
     sudo pacman-key --populate archlinux
@@ -15,6 +20,7 @@ then
     sudo pacman -S base-devel
 else
     echo "Base Packages were not installed"
+    sudo steamos-readyonly enable
 fi
 
 installDocker() {
@@ -67,6 +73,7 @@ installMorePackages() {
         [nN] ) echo "Python was not installed";;
         * ) echo "Invalid input. Python was not installed";;
     esac
+    sudo steamos-readyonly enable
 }
 
 read -p "Do you want to install more packages? Press Enter or type 'y' to proceed, or 'n' to skip: " install_packages
