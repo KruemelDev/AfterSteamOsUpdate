@@ -1,8 +1,8 @@
 #! /usr/bin/bash
 
 # Update all packages
-sudo pacman -Syu
 sudo steamos-readonly disable
+sudo pacman -Syu
 
 read -p "Do you want to install the base packages? Press Enter or type 'y' to proceed, or 'n' to skip: " base_packages
 if [[ -z "$base_packages" || "$base_packages" == "y" ]]
@@ -16,8 +16,9 @@ then
     sudo pacman-key --populate archlinux
 
     # "Remove" fakeroot to install base-devels
-    sudo mv /etc/ld.so.conf.d/fakeroot.conf /etc/ld.so.conf.d/fakeroot2.conf
     sudo pacman -S base-devel
+    sudo mv /etc/ld.so.conf.d/fakeroot.conf /etc/ld.so.conf.d/fakeroot2.conf
+
 else
     echo "Base Packages were not installed"
     sudo steamos-readonly enable
