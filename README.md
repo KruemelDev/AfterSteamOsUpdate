@@ -1,5 +1,6 @@
 # AfterSteamOsUpdate
 
+
 ## Explanation
 
 If you have a steam deck and the steam deck gets a new update, all packages with pacman or software that is not flatpak will be deleted.
