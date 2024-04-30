@@ -26,20 +26,28 @@ else
 fi
 
 installDocker() {
-    sudo pacman -S docker
-    sudo pacman -S docker-compose
+    sudo pacman -S docker -y
+    sudo pacman -S docker-compose -y
 }
 
 installNetstat() {
-    sudo pacman -S net-tools
+    sudo pacman -S net-tools -y
 }
 
 installRatbagd() {
-    sudo pacman -S ratbagd
+    sudo pacman -S ratbagd -y
 }
 installPython() {
-    sudo pacman -S python
-    sudo pacman -S python-pip
+    sudo pacman -S python -y
+    sudo pacman -S python-pip -y
+}
+installJava(){
+    sudo pacman -S jdk17-openjdk openjdk17-doc -y
+    sudo pacman -S openjdk17-src -y
+    sudo pacman -S jre17-openjdk -y
+}
+installNode(){
+    sudo pacman -S nodejs -y
 }
 
 # Install pacman packages
@@ -72,6 +80,20 @@ installMorePackages() {
     read -p "Install python? Press Enter or type 'y' to proceed, or 'n' to skip: " install_python
     case "$install_python" in
         [yY] | "" ) installPython;;
+        [nN] ) echo "Python was not installed";;
+        * ) echo "Invalid input. Python was not installed";;
+    esac
+    echo
+    read -p "Install node? Press Enter or type 'y' to proceed, or 'n' to skip: " install_node
+    case "$install_node" in
+        [yY] | "" ) installNode;;
+        [nN] ) echo "Python was not installed";;
+        * ) echo "Invalid input. Python was not installed";;
+    esac
+    echo
+    read -p "Install java? Press Enter or type 'y' to proceed, or 'n' to skip: " install_java
+    case "$install_java" in
+        [yY] | "" ) installJava;;
         [nN] ) echo "Python was not installed";;
         * ) echo "Invalid input. Python was not installed";;
     esac
