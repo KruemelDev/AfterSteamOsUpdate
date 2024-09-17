@@ -28,6 +28,7 @@ fi
 installDocker() {
     sudo pacman -S docker -y
     sudo pacman -S docker-compose -y
+    sudo pacman -S docker-buildx -y
 }
 
 installNetstat() {
@@ -48,6 +49,9 @@ installJava(){
 }
 installNode(){
     sudo pacman -S nodejs -y
+}
+installGlibc(){
+    sudo pacman -S glibc -y
 }
 
 # Install pacman packages
@@ -80,22 +84,29 @@ installMorePackages() {
     read -p "Install python? Press Enter or type 'y' to proceed, or 'n' to skip: " install_python
     case "$install_python" in
         [yY] | "" ) installPython;;
-        [nN] ) echo "Python was not installed";;
-        * ) echo "Invalid input. Python was not installed";;
+        [nN] ) echo "python was not installed";;
+        * ) echo "Invalid input. python was not installed";;
     esac
     echo
     read -p "Install node? Press Enter or type 'y' to proceed, or 'n' to skip: " install_node
     case "$install_node" in
         [yY] | "" ) installNode;;
-        [nN] ) echo "Python was not installed";;
-        * ) echo "Invalid input. Python was not installed";;
+        [nN] ) echo "node was not installed";;
+        * ) echo "Invalid input. node was not installed";;
     esac
     echo
     read -p "Install java? Press Enter or type 'y' to proceed, or 'n' to skip: " install_java
     case "$install_java" in
         [yY] | "" ) installJava;;
-        [nN] ) echo "Python was not installed";;
-        * ) echo "Invalid input. Python was not installed";;
+        [nN] ) echo "java was not installed";;
+        * ) echo "Invalid input. java was not installed";;
+    esac
+    echo
+    read -p "Install glibc? Press Enter or type 'y' to proceed, or 'n' to skip: " installGlibc
+    case "$install_java" in
+        [yY] | "" ) installGlibc;;
+        [nN] ) echo "glibc was not installed";;
+        * ) echo "Invalid input. glibc was not installed";;
     esac
 }
 
