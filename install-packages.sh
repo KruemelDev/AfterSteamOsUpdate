@@ -25,6 +25,10 @@ else
     echo "Base Packages were not installed"
 fi
 
+installGraphicDevHeaders(){
+
+}
+install
 installDocker() {
     sudo pacman -S docker -y
     sudo pacman -S docker-compose -y
@@ -43,15 +47,17 @@ installPython() {
     sudo pacman -S python-pip -y
 }
 installJava(){
-    sudo pacman -S jdk17-openjdk openjdk17-doc -y
-    sudo pacman -S openjdk17-src -y
-    sudo pacman -S jre17-openjdk -y
+    sudo pacman -S jdk21-openjdk
+    sudo pacman -S gradle
 }
 installNode(){
     sudo pacman -S nodejs -y
 }
-installGlibc(){
+installDevTools(){
     sudo pacman -S glibc -y
+
+    # Graphic dev tools
+    sudo pacman -S libx11 libxi libxrandr libxinerama libxcursor libxext libxrender mesa -y
 }
 
 # Install pacman packages
@@ -102,12 +108,13 @@ installMorePackages() {
         * ) echo "Invalid input. java was not installed";;
     esac
     echo
-    read -p "Install glibc? Press Enter or type 'y' to proceed, or 'n' to skip: " installGlibc
-    case "$install_java" in
-        [yY] | "" ) installGlibc;;
-        [nN] ) echo "glibc was not installed";;
-        * ) echo "Invalid input. glibc was not installed";;
+    read -p "Install c dev tools? Press Enter or type 'y' to proceed, or 'n' to skip: " installDevTools
+    case "installDevTools" in
+        [yY] | "" ) installDevTools;;
+        [nN] ) echo "Dev tools were not installed";;
+        * ) echo "Invalid input. Dev tools was not installed";;
     esac
+    echo -p
 }
 
 read -p "Do you want to install more packages? Press Enter or type 'y' to proceed, or 'n' to skip: " install_packages
