@@ -59,6 +59,9 @@ installDevTools(){
     # Graphic dev tools
     sudo pacman -S libx11 libxi libxrandr libxinerama libxcursor libxext libxrender mesa -y
 }
+installRayLib(){
+    sudo pacman -S raylib -y
+}
 
 # Install pacman packages
 installMorePackages() {
@@ -114,7 +117,13 @@ installMorePackages() {
         [nN] ) echo "Dev tools were not installed";;
         * ) echo "Invalid input. Dev tools was not installed";;
     esac
-    echo -p
+    echo
+    read -p "Install raylib? Press Enter or type 'y' to proceed, or 'n' to skip: " installRayLib
+    case "installRayLib" in
+        [yY] | "" ) installRayLib;;
+        [nN] ) echo "Raylib was not installed";;
+        * ) echo "Invalid input. Raylib was not installed";;
+    esac
 }
 
 read -p "Do you want to install more packages? Press Enter or type 'y' to proceed, or 'n' to skip: " install_packages
